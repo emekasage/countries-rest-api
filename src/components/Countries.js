@@ -1,32 +1,15 @@
 import React, { useState, useEffect } from "react";
-
-const BASE_URL = `https://restcountries.com/v2/`;
+import { Link } from "react-router-dom";
+import { BASE_URL } from "./Url";
 
 function Countries() {
   const [countries, setCountries] = useState([]);
-  const [mode, setMode] = useState(true);
-  const [toggleBtn, setToggleBtn] = useState(
-    '<ion-icon name="sunny-outline"></ion-icon> Light Mode'
-  );
 
-  const fetchCountryData = async () => {
+  const fetchCountries = async () => {
     const response = await fetch(`${BASE_URL}all`);
     const countries = await response.json();
     setCountries(countries);
     // console.log(countries);
-  };
-
-  const toggleDarkMode = () => {
-    if (mode) {
-      document.documentElement.classList.add("dark");
-      setToggleBtn('<ion-icon name="moon-outline"></ion-icon> Dark Mode');
-      setMode((current) => (current = !current));
-    }
-    if (!mode) {
-      document.documentElement.classList.remove("dark");
-      setToggleBtn('<ion-icon name="sunny-outline"></ion-icon> Light Mode');
-      setMode((current) => (current = !current));
-    }
   };
 
   const searchCountry = async (term) => {
@@ -44,25 +27,11 @@ function Countries() {
   };
 
   useEffect(() => {
-    fetchCountryData();
+    fetchCountries();
   }, []);
   return (
     <>
       <div className="bg-gray-100 dark:bg-gray-800 dark:text-white overflow-x-hidden">
-        {/* Header Section */}
-        <div className="w-screen shadow-md py-6 pl-10 pr-14 bg-white dark:bg-gray-700 dark:text-white mb-16">
-          <div className="flex container mx-auto">
-            <h1 className="font-bold text-xl">Where in the world?</h1>
-            <div className="ml-auto font-medium my-auto">
-              <button
-                onClick={() => toggleDarkMode()}
-                dangerouslySetInnerHTML={{ __html: toggleBtn }}
-              ></button>
-            </div>
-          </div>
-        </div>
-        {/* End of Header Section */}
-
         {/* Search and Filter Functionality */}
         <div className="flex flex-col md:flex-row container mx-auto mb-16 px-10">
           <div className="my-auto z-10 absolute left-14 mt-3 md:mt-4">
@@ -98,34 +67,36 @@ function Countries() {
                 key={numericCode}
                 className="container rounded-lg shadow-lg bg-white dark:bg-gray-700 dark:text-white"
               >
-                <div>
-                  <img
-                    src={flag}
-                    alt={name}
-                    className="h-1/2 rounded-tl-lg rounded-tr-lg"
-                  />
-                  <div className="p-4">
-                    <h3 className="font-bold mb-2">{name}</h3>
-                    <h4 className="text-sm font-semibold">
-                      Population:{" "}
-                      <span className="text-gray-700 dark:text-gray-300 font-normal">
-                        {population}
-                      </span>
-                    </h4>
-                    <h4 className="text-sm font-semibold">
-                      Region:{" "}
-                      <span className="text-gray-700 dark:text-gray-300 font-normal">
-                        {region}
-                      </span>
-                    </h4>
-                    <h4 className="text-sm font-semibold">
-                      Capital:{" "}
-                      <span className="text-gray-700 dark:text-gray-300 font-normal">
-                        {capital}
-                      </span>
-                    </h4>
+                <Link to={`/country/${name}`}>
+                  <div>
+                    <img
+                      src={flag}
+                      alt={name}
+                      className="h-1/2 rounded-tl-lg rounded-tr-lg"
+                    />
+                    <div className="p-4">
+                      <h3 className="font-bold mb-2">{name}</h3>
+                      <h4 className="text-sm font-semibold">
+                        Population:{" "}
+                        <span className="text-gray-700 dark:text-gray-300 font-normal">
+                          {population}
+                        </span>
+                      </h4>
+                      <h4 className="text-sm font-semibold">
+                        Region:{" "}
+                        <span className="text-gray-700 dark:text-gray-300 font-normal">
+                          {region}
+                        </span>
+                      </h4>
+                      <h4 className="text-sm font-semibold">
+                        Capital:{" "}
+                        <span className="text-gray-700 dark:text-gray-300 font-normal">
+                          {capital}
+                        </span>
+                      </h4>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </article>
             );
           })}
