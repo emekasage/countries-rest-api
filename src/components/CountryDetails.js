@@ -12,7 +12,7 @@ function CountryDetails() {
 
   //   api call to fetch each country's data
   const fetchCountryData = async () => {
-    const response = await fetch(`${BASE_URL}/name/${name}`);
+    const response = await fetch(`${BASE_URL}name/${name}`);
     const country = await response.json();
     setCountry(country);
     console.log(country);
@@ -20,7 +20,7 @@ function CountryDetails() {
 
   useEffect(() => {
     fetchCountryData();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

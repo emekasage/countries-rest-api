@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Countries REST API
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A react.js project that displays countries using the [REST Countries V2 API] (https://restcountries.com/#api-endpoints-v2)
 
 ## Available Scripts
 
