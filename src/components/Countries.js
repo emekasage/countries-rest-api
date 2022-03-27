@@ -48,12 +48,12 @@ function Countries() {
   }, []);
   return (
     <>
-      <div className="bg-gray-100 dark:bg-gray-800 dark:text-white">
+      <div className="bg-gray-100 dark:bg-gray-800 dark:text-white overflow-x-hidden">
         {/* Header Section */}
-        <div className="w-screen shadow-md py-6 px-3 bg-white dark:bg-gray-700 dark:text-white mb-16">
+        <div className="w-screen shadow-md py-6 pl-10 pr-14 bg-white dark:bg-gray-700 dark:text-white mb-16">
           <div className="flex container mx-auto">
             <h1 className="font-bold text-xl">Where in the world?</h1>
-            <div className="ml-auto font-medium">
+            <div className="ml-auto font-medium my-auto">
               <button
                 onClick={() => toggleDarkMode()}
                 dangerouslySetInnerHTML={{ __html: toggleBtn }}
@@ -64,23 +64,23 @@ function Countries() {
         {/* End of Header Section */}
 
         {/* Search and Filter Functionality */}
-        <div className="flex container mx-auto mb-16">
-          <div className="my-auto z-10 absolute left-3 mt-5">
+        <div className="flex flex-col md:flex-row container mx-auto mb-16 px-10">
+          <div className="my-auto z-10 absolute left-14 mt-3 md:mt-4">
             <ion-icon name="search-outline"></ion-icon>
           </div>
           <input
             type="text"
-            placeholder="search for a country..."
-            className="pl-10 p-2 shadow-md rounded-md w-1/3 dark:bg-gray-700 relative"
+            placeholder="Search for a country..."
+            className="pl-10 p-2.5 shadow-md rounded-md md:w-1/3 dark:bg-gray-700 relative"
             onChange={(term) => searchCountry(term.target.value)}
           />
           <select
-            className="ml-auto my-2 p-2 shadow-md rounded-md font-medium dark:bg-gray-700"
+            className="mr-auto ml-0 md:ml-auto md:mr-0 mt-6 md:mt-0 my-2 p-2.5 shadow-md rounded-md font-medium dark:bg-gray-700"
             onChange={(val) => filterByRegion(val.target.value)}
           >
-            <option>filter by region</option>
+            <option value="">Filter by region</option>
             <option value="africa">Africa</option>
-            <option value="america">America</option>
+            <option value="americas">Americas</option>
             <option value="asia">Asia</option>
             <option value="europe">Europe</option>
             <option value="oceania">Oceania</option>
@@ -88,18 +88,48 @@ function Countries() {
         </div>
         {/* End of search and Filter Functionality */}
 
-        {countries.map((country) => {
-          const { numericCode, name, population, region, capital, flag } =
-            country;
+        <div className="container grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:gap-12 xl:grid-cols-4 xl:gap-16 mx-auto px-10">
+          {countries.map((country) => {
+            const { numericCode, name, population, region, capital, flag } =
+              country;
 
-          return (
-            <article key={numericCode}>
-              <div>
-                <img src={flag} alt={name} />
-              </div>
-            </article>
-          );
-        })}
+            return (
+              <article
+                key={numericCode}
+                className="container rounded-lg shadow-lg bg-white dark:bg-gray-700 dark:text-white"
+              >
+                <div>
+                  <img
+                    src={flag}
+                    alt={name}
+                    className="h-1/2 rounded-tl-lg rounded-tr-lg"
+                  />
+                  <div className="p-4">
+                    <h3 className="font-bold mb-2">{name}</h3>
+                    <h4 className="text-sm font-semibold">
+                      Population:{" "}
+                      <span className="text-gray-700 dark:text-gray-300 font-normal">
+                        {population}
+                      </span>
+                    </h4>
+                    <h4 className="text-sm font-semibold">
+                      Region:{" "}
+                      <span className="text-gray-700 dark:text-gray-300 font-normal">
+                        {region}
+                      </span>
+                    </h4>
+                    <h4 className="text-sm font-semibold">
+                      Capital:{" "}
+                      <span className="text-gray-700 dark:text-gray-300 font-normal">
+                        {capital}
+                      </span>
+                    </h4>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </>
   );
