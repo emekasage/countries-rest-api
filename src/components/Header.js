@@ -6,6 +6,8 @@ function Header() {
     '<ion-icon name="sunny-outline"></ion-icon> Light Mode'
   );
 
+  //   function to toggle mode: 'dark' and 'light'.
+  //   It is set to light by default
   const toggleDarkMode = () => {
     if (mode) {
       document.documentElement.classList.add("dark");

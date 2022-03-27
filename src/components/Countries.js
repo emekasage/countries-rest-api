@@ -5,11 +5,11 @@ import { BASE_URL } from "./Url";
 function Countries() {
   const [countries, setCountries] = useState([]);
 
+  //   api call to fetch all the countries
   const fetchCountries = async () => {
     const response = await fetch(`${BASE_URL}all`);
     const countries = await response.json();
     setCountries(countries);
-    // console.log(countries);
   };
 
   const searchCountry = async (term) => {
@@ -57,6 +57,7 @@ function Countries() {
         </div>
         {/* End of search and Filter Functionality */}
 
+        {/* Countries */}
         <div className="container grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:gap-12 xl:grid-cols-4 xl:gap-16 mx-auto px-10">
           {countries.map((country) => {
             const { numericCode, name, population, region, capital, flag } =
