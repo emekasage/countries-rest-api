@@ -115,7 +115,7 @@ function CountryDetails() {
                   </div>
                   <div className="block md:flex md:items-center py-14">
                     <h3 className="font-semibold">Border Countries: </h3>
-                    <div className="space-x-3 space-y-3 my-3 md:my-0 md:ml-2">
+                    <div className="space-x-3 space-y-3 md:space-y-0 my-3 md:my-0 md:ml-2">
                       {typeof borders !== "undefined" &&
                         borders.map((border) => {
                           return (
